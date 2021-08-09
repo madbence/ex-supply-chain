@@ -11,12 +11,21 @@ import Themes from "./themes";
 import App from "./components/App";
 import { UserProvider } from "./context/UserContext";
 
-ReactDOM.render(
-  <UserProvider>
-    <ThemeProvider theme={Themes.default}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
-  </UserProvider>,
-  document.getElementById("root"),
-);
+import { App as NextApp } from './next'
+
+if (window.location.href.includes('oldUI')) {
+  ReactDOM.render(
+    <UserProvider>
+      <ThemeProvider theme={Themes.default}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </UserProvider>,
+    document.getElementById("root"),
+  );
+} else {
+  ReactDOM.render(
+    <NextApp />,
+    document.getElementById("root"),
+  );
+}
